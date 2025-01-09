@@ -1,0 +1,147 @@
+<?xml version="1.0"?>
+<rdf:RDF
+    xmlns:dct="http://purl.org/dc/terms/"
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:vcard="http://www.w3.org/2006/vcard/ns#"
+    xmlns:locn="http://www.w3.org/ns/locn#"
+    xmlns:dcat="http://www.w3.org/ns/dcat#"
+    xmlns:foaf="http://xmlns.com/foaf/0.1/"
+    xmlns:dcatapde="http://dcat-ap.de/def/dcatde/">
+  <dcat:Distribution rdf:about="http://data.europa.eu/88u/distribution/ce639fa3-005b-4b84-b963-80ea32d00670">
+    <dct:title>ArcGIS Hub Dataset</dct:title>
+    <dcat:mediaType>text/html</dcat:mediaType>
+    <dct:title xml:lang="sk-t-de-t0-mtec">ArcGIS Hub Dataset</dct:title>
+    <dct:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime"
+    >2022-08-05T06:01:22.150906</dct:modified>
+    <dct:title xml:lang="da-t-de-t0-mtec">ArcGIS Hub Datasæt</dct:title>
+    <dct:identifier>urn:uuid:d214fef2-b21a-f88d-1e4b-cd98acd573a1</dct:identifier>
+    <dcat:accessURL>
+      <dcat:Dataset rdf:about="http://data.europa.eu/88u/dataset/https-portal-chemnitz-opendata-arcgis-com-datasets-chemnitz-tierparks">
+        <dct:description xml:lang="mt-t-de-t0-mtec">Preżentazzjoni tal-faċilitajiet muniċipali Tierpark Chemnitz u Wildgatter Oberrabenstein</dct:description>
+        <dcat:keyword>tierpark</dcat:keyword>
+        <dcatapde:contributorID rdf:resource="http://dcat-ap.de/def/contributors/freistaatSachsen"/>
+        <dct:title xml:lang="et-t-de-t0-mtec">Loomapargid</dct:title>
+        <dcat:distribution rdf:resource="http://data.europa.eu/88u/distribution/ce639fa3-005b-4b84-b963-80ea32d00670"/>
+        <dcat:distribution>
+          <dcat:Distribution rdf:about="http://data.europa.eu/88u/distribution/47078916-d342-437f-88e0-cfc33af4f84b">
+            <dct:issued rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime"
+            >2022-04-15T03:25:27.464103</dct:issued>
+            <dct:title xml:lang="sl-t-de-t0-mtec">ArcGIS GeoService</dct:title>
+            <dcat:mediaType>application/json</dcat:mediaType>
+            <dct:format>JSON</dct:format>
+            <dct:identifier>urn:uuid:d34e2d0f-2ea7-4efc-6411-93421f63bde0</dct:identifier>
+            <dct:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime"
+            >2022-08-05T06:01:22.151228</dct:modified>
+            <dct:license rdf:resource="http://dcat-ap.de/def/licenses/dl-by-de/2.0"/>
+            <dcat:accessURL rdf:resource="https://services6.arcgis.com/jiszdsDupTUO3fSM/arcgis/rest/services/Tierparks_FL_1/FeatureServer/0"/>
+          </dcat:Distribution>
+        </dcat:distribution>
+        <dct:description xml:lang="lv-t-de-t0-mtec">Iepazīstināšana ar pašvaldības iestādēm Tierpark Chemnitz un Wildgatter Oberrabenstein</dct:description>
+        <dcat:landingPage rdf:resource="https://portal-chemnitz.opendata.arcgis.com/datasets/chemnitz::tierparks"/>
+        <dct:spatial>
+          <dct:Location>
+            <locn:geometry rdf:datatype="http://replacement.io/ont/geosparql#wktLiteral"
+            >POLYGON ((12.8398 50.8377, 12.7969 50.8377, 12.7969 50.8169, 12.8398 50.8169, 12.8398 50.8377))</locn:geometry>
+            <locn:geometry rdf:datatype="https://replacement.io/assignments/media-types/application/vnd.geo+json"
+            >{"type": "Polygon", "coordinates": [[[12.8398, 50.8377], [12.7969, 50.8377], [12.7969, 50.8169], [12.8398, 50.8169], [12.8398, 50.8377]]]}</locn:geometry>
+          </dct:Location>
+        </dct:spatial>
+        <dcat:distribution>
+          <dcat:Distribution rdf:about="http://data.europa.eu/88u/distribution/68371834-af5d-41dd-a70b-75cda9cf3116">
+            <dct:license rdf:resource="http://dcat-ap.de/def/licenses/dl-by-de/2.0"/>
+            <dct:title>CSV</dct:title>
+            <dct:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime"
+            >2022-08-05T06:01:22.151087</dct:modified>
+            <dct:issued rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime"
+            >2022-04-15T03:25:27.464110</dct:issued>
+            <dct:identifier>urn:uuid:b72fecec-b225-a482-6eaf-d90f41f75433</dct:identifier>
+            <dct:format>CSV</dct:format>
+            <dcat:accessURL rdf:resource="https://portal-chemnitz.opendata.arcgis.com/datasets/chemnitz::tierparks.csv?outSR=%7B%22latestWkid%22%253A3857%252C%22wkid%22%253A102100%7D"/>
+            <dcat:mediaType>text/csv</dcat:mediaType>
+          </dcat:Distribution>
+        </dcat:distribution>
+        <dct:title xml:lang="en-t-de-t0-mtec">Animal Parks</dct:title>
+        <dct:description xml:lang="fr-t-de-t0-mtec">Représentation des installations urbaines Tierpark Chemnitz et Wildgatter Oberrabenstein</dct:description>
+        <dct:identifier rdf:resource="https://portal-chemnitz.opendata.arcgis.com/datasets/chemnitz::tierparks"/>
+        <dcat:keyword>chemnitz</dcat:keyword>
+        <dcat:distribution>
+          <dcat:Distribution rdf:about="http://data.europa.eu/88u/distribution/239749e4-27db-4522-9230-1c5d2fee58c9">
+            <dct:title xml:lang="sv-t-de-t0-mtec">Formfil</dct:title>
+            <dct:issued rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime"
+            >2022-04-15T03:25:27.464113</dct:issued>
+            <dct:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime"
+            >2022-08-05T06:01:22.151346</dct:modified>
+            <dct:identifier>urn:uuid:fda9b45c-5910-6e1e-d1dd-61fd8f53a793</dct:identifier>
+            <dcat:mediaType>application/zip</dcat:mediaType>
+            <dct:license rdf:resource="http://dcat-ap.de/def/licenses/dl-by-de/2.0"/>
+            <dct:format>ZIP</dct:format>
+            <dcat:accessURL rdf:resource="https://portal-chemnitz.opendata.arcgis.com/datasets/chemnitz::tierparks.zip?outSR=%7B%22latestWkid%22%253A3857%252C%22wkid%22%253A102100%7D"/>
+          </dcat:Distribution>
+        </dcat:distribution>
+        <dct:description xml:lang="lt-t-de-t0-mtec">Savivaldybės įrenginių „Tierpark Chemnitz“ ir „Wildgatter Oberrabenstein“ pristatymas</dct:description>
+        <dcat:distribution>
+          <dcat:Distribution rdf:about="http://data.europa.eu/88u/distribution/7b598cc4-6645-432c-8e41-63f6b94bdd2b">
+            <dct:license rdf:resource="http://dcat-ap.de/def/licenses/dl-by-de/2.0"/>
+            <dct:title xml:lang="it-t-de-t0-mtec">Foto di GeoJSON</dct:title>
+            <dcat:accessURL rdf:resource="https://portal-chemnitz.opendata.arcgis.com/datasets/chemnitz::tierparks.geojson?outSR=%7B%22latestWkid%22%253A3857%252C%22wkid%22%253A102100%7D"/>
+            <dcat:mediaType>application/vnd.geo+json</dcat:mediaType>
+            <dct:issued rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime"
+            >2022-04-15T03:25:27.464107</dct:issued>
+            <dct:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime"
+            >2022-08-05T06:01:22.150705</dct:modified>
+            <dct:identifier>urn:uuid:199acfa3-533f-a049-2e82-6945e872905c</dct:identifier>
+          </dcat:Distribution>
+        </dcat:distribution>
+        <dcat:distribution>
+          <dcat:Distribution rdf:about="http://data.europa.eu/88u/distribution/a71bac3d-beb0-48c1-8955-e4ced5c1ec58">
+            <dct:format>KML</dct:format>
+            <dct:identifier>urn:uuid:b2d9fd34-8d61-76be-ca71-1d4945bf4c45</dct:identifier>
+            <dcat:mediaType>application/vnd.google-earth.kml+xml</dcat:mediaType>
+            <dcat:accessURL rdf:resource="https://portal-chemnitz.opendata.arcgis.com/datasets/chemnitz::tierparks.kml?outSR=%7B%22latestWkid%22%253A3857%252C%22wkid%22%253A102100%7D"/>
+            <dct:title xml:lang="lv-t-de-t0-mtec">KML</dct:title>
+            <dct:issued rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime"
+            >2022-04-15T03:25:27.464093</dct:issued>
+            <dct:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime"
+            >2022-08-05T06:01:22.151463</dct:modified>
+            <dct:license rdf:resource="http://dcat-ap.de/def/licenses/dl-by-de/2.0"/>
+          </dcat:Distribution>
+        </dcat:distribution>
+        <dcat:keyword>freizeit</dcat:keyword>
+        <dct:title xml:lang="da-t-de-t0-mtec">Dyreparker</dct:title>
+        <dct:publisher>
+          <foaf:Organization rdf:about="urn:uuid:300a439d-2ed6-6036-b22c-b7aa9c735b48">
+            <foaf:name>Stadt Chemnitz</foaf:name>
+          </foaf:Organization>
+        </dct:publisher>
+        <dcat:theme rdf:resource="http://publications.europa.eu/resource/authority/data-theme/EDUC"/>
+        <dct:issued rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime"
+        >2021-12-01T00:00:00</dct:issued>
+        <dct:title xml:lang="fi-t-de-t0-mtec">Eläinpuistot</dct:title>
+        <dcatapde:maintainer>
+          <foaf:Organization>
+            <foaf:mbox>tierpark@stadt-chemnitz.de</foaf:mbox>
+            <foaf:name>Stadt Chemnitz, Amt 48, Tierpark</foaf:name>
+          </foaf:Organization>
+        </dcatapde:maintainer>
+        <dct:title>Tierparks</dct:title>
+        <dct:description xml:lang="es-t-de-t0-mtec">Presentación de las instalaciones municipales Tierpark Chemnitz y Wildgatter Oberrabenstein</dct:description>
+        <dcat:contactPoint>
+          <vcard:Organization rdf:about="urn:uuid:a7eab660-7a93-506b-0ae0-12a7aeff289b">
+            <vcard:hasEmail rdf:resource="mailto:umweltamt@stadt-chemnitz.de"/>
+            <vcard:fn>GISAdminChemnitz</vcard:fn>
+           <vcard:hasEmail rdf:resource="mailto:gruenflaechenamt@stadt-chemnitz.de"/>
+          </vcard:Organization>
+        </dcat:contactPoint>
+        <dct:description xml:lang="da-t-de-t0-mtec">Præsentation af de kommunale faciliteter Tierpark Chemnitz og Wildgatter Oberrabenstein</dct:description>
+        <dct:title xml:lang="lv-t-de-t0-mtec">Dzīvnieku parki</dct:title>
+        <dct:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime"
+        >2024-05-23T02:43:13.383246</dct:modified>
+      </dcat:Dataset>
+    </dcat:accessURL>
+    <dct:format>HTML</dct:format>
+    <dct:issued rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime"
+    >2022-04-15T03:25:27.464100</dct:issued>
+    <dct:license rdf:resource="http://dcat-ap.de/def/licenses/dl-by-de/2.0"/>
+    <dct:title xml:lang="it-t-de-t0-mtec">Set di dati ArcGIS Hub</dct:title>
+  </dcat:Distribution>
+</rdf:RDF>
