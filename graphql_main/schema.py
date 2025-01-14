@@ -1,43 +1,48 @@
 import graphene
 from graphene_django.types import DjangoObjectType
-import requests
-from django.urls import reverse
-from django.http import HttpRequest        
+from sparql_main.models import Head, Binding, Results, JsonData
 
-class Binding(graphene.ObjectType):
+class HeadType(graphene.ObjectType):
+    vars = graphene.List(graphene.String)
+    link = graphene.List(graphene.String)
+
+class BindingType(graphene.ObjectType):
     distribution = graphene.String()
     title = graphene.String()
     mediaType = graphene.String()
-    modified = graphene.String()
+    modified = graphene.DateTime()
     identifier = graphene.String()
     accessURL = graphene.String()
     description = graphene.String()
-    geometry = graphene.String()
+    geometry = graphene.JSONString()
     license = graphene.String()
     publisherName = graphene.String()
     maintainerEmail = graphene.String()
 
-class Results(graphene.ObjectType):
+class ResultsType(graphene.ObjectType):
     distinct = graphene.Boolean()
     ordered = graphene.Boolean()
-    bindings = graphene.List(Binding)
+    bindings = graphene.List(BindingType)
+    def resolve_bindings(self, info):
+        if hasattr(self, "bindings"):
+            return self.bindings.all()
+        return []
 
-class Head(graphene.ObjectType):
-    link = graphene.List(graphene.String)
-    vars = graphene.List(graphene.String)
+class JsonDataType(graphene.ObjectType):
+    head = graphene.Field(HeadType)
+    results = graphene.Field(ResultsType)
 
-class Root(graphene.ObjectType):
-    head = graphene.Field(Head)
-    results = graphene.Field(Results)
+    def resolve_head(self, info):
+        return self.head
+
+    def resolve_results(self, info):
+        return self.results
 
 class Query(graphene.ObjectType):
-    data = graphene.Field(Root)
+    json_data = graphene.Field(JsonDataType)
 
-    def resolve_data(self, info):
-        request: HttpRequest = info.context["request"]
-        machine_data_url = request.build_absolute_uri(reverse("machine_data"))
-        response = requests.get(machine_data_url)
-        json_data = response.json()
-        return json_data
+    def resolve_json_data(self, info):
+        json_data_instance = JsonData.objects.first()
+        return json_data_instance
 
 schema = graphene.Schema(query=Query)

@@ -1,5 +1,9 @@
 from SPARQLWrapper import SPARQLWrapper, JSON
 import ssl
+import json
+
+from .date_parser import parse_date
+from .models import Binding, Head, JsonData, Results
 
 def sparqlWrapperTest():
     try:
@@ -51,5 +55,54 @@ LIMIT 2
     """)
     sparql.setReturnFormat(JSON)
     results = sparql.query().convert()
-    print(results)
-    return results
+    
+    head_data = results.get('head', {})
+    head = Head.objects.create(
+        vars=head_data.get('vars', []),
+        link=head_data.get('link', [])
+    )
+    results_data = results.get('results', {})
+    bindings = []
+    
+    for binding in results_data.get('bindings', []):
+        binding_obj = Binding.objects.create(
+            distribution=binding.get('distribution', {}).get('value'),
+            title=binding.get('title', {}).get('value'),
+            mediaType=binding.get('mediaType', {}).get('value'),
+            modified=parse_date(binding.get('modified', {}).get('value')),
+            identifier=binding.get('identifier', {}).get('value'),
+            accessURL=binding.get('accessURL', {}).get('value'),
+            description=binding.get('description', {}).get('value'),
+            geometry=json.loads(binding.get('geometry', {}).get('value', "{}")), 
+            license=binding.get('license', {}).get('value'),
+            publisherName=binding.get('publisherName', {}).get('value'),
+            maintainerEmail=binding.get('maintainerEmail', {}).get('value'),
+        )
+        bindings.append(binding_obj)
+        results = Results.objects.create(
+        distinct=results_data.get('distinct', False),
+        ordered=results_data.get('ordered', True)
+    )
+    results.bindings.set(bindings)
+    json_entry = JsonData.objects.create(
+        head=head,
+        results=results
+    )
+    json_entry = JsonData.objects.first()
+    print(json_entry.head.vars)
+    print(json_entry.results.bindings.all())
+    bindings_queryset = json_entry.results.bindings.all()
+    for binding in bindings_queryset:
+      print(f"Distribution: {binding.distribution}")
+      print(f"Title: {binding.title}")
+      print(f"Media Type: {binding.mediaType}")
+      print(f"Modified: {binding.modified}")
+      print(f"Identifier: {binding.identifier}")
+      print(f"Access URL: {binding.accessURL}")
+      print(f"Description: {binding.description}")
+      print(f"Geometry: {binding.geometry}")
+      print(f"License: {binding.license}")
+      print(f"Publisher Name: {binding.publisherName}")
+      print(f"Maintainer Email: {binding.maintainerEmail}")
+      print("-" * 40) 
+    return {"message": "data saved successfully"}
