@@ -3,9 +3,9 @@ import ssl
 import json
 
 from .date_parser import parse_date
-from .models import Binding, Head, JsonData, Results
+from .models import Binding, Data, Head, Results
 
-def sparqlWrapperTest():
+def sparqlWrapperTest(dataset_name):
     try:
      _create_unverified_https_context = ssl._create_unverified_context
     except AttributeError:
@@ -14,7 +14,17 @@ def sparqlWrapperTest():
         ssl._create_default_https_context = _create_unverified_https_context
         
     sparql = SPARQLWrapper("https://data.europa.eu/sparql")
-    dataset = "http://data.europa.eu/88u/dataset/https-portal-chemnitz-opendata-arcgis-com-datasets-chemnitz-tierparks"
+    dataset = ""
+    
+    if dataset_name == "Animal Parks":
+     dataset = "http://data.europa.eu/88u/dataset/https-portal-chemnitz-opendata-arcgis-com-datasets-chemnitz-tierparks"
+    elif dataset_name == "Parking ticket machines":
+     dataset = "http://data.europa.eu/88u/dataset/https-portal-chemnitz-opendata-arcgis-com-datasets-chemnitz-parkscheinautomaten"
+    elif dataset_name == "Schools":
+     dataset = "http://data.europa.eu/88u/dataset/https-portal-chemnitz-opendata-arcgis-com-datasets-chemnitz-schulen"
+    else:
+     dataset = None 
+        
     sparql.addParameter("default-graph-uri", dataset)
     sparql.addParameter("distinct", "true")
     sparql.setQuery("""
@@ -79,16 +89,19 @@ LIMIT 2
             maintainerEmail=binding.get('maintainerEmail', {}).get('value'),
         )
         bindings.append(binding_obj)
-        results = Results.objects.create(
+        
+    
+    
+    results = Results.objects.create(
         distinct=results_data.get('distinct', False),
-        ordered=results_data.get('ordered', True)
+        ordered=results_data.get('ordered', True),
     )
     results.bindings.set(bindings)
-    json_entry = JsonData.objects.create(
+    json_entry = Data.objects.create(
         head=head,
         results=results
     )
-    json_entry = JsonData.objects.first()
+    json_entry = Data.objects.first()
     print(json_entry.head.vars)
     print(json_entry.results.bindings.all())
     bindings_queryset = json_entry.results.bindings.all()

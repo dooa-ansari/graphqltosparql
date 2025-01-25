@@ -1,6 +1,8 @@
 from django.urls import path
-from .views import get_rdf_data
+from .views import get_rdf_data, get_search_chemnitz_list
 
 urlpatterns = [
-    path('machine_data/',get_rdf_data, name='machine_data')
+    path('machine_data',get_rdf_data, name='machine_data'),
+    path('chemnitz_datasets', get_search_chemnitz_list, name='chemnitz_datasets'),
 ]
+# http://127.0.0.1:8000/machine_data/chemnitz_datasets

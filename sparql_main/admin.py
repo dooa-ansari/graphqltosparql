@@ -1,3 +1,7 @@
 from django.contrib import admin
 
-# Register your models here.
+from .models import Head, Binding, Results
+
+admin.site.register(Head)
+admin.site.register(Binding)
+admin.site.register(Results)

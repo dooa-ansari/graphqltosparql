@@ -1,6 +1,6 @@
 import graphene
 from graphene_django.types import DjangoObjectType
-from sparql_main.models import Head, Binding, Results, JsonData
+from sparql_main.models import Head, Binding, Results, Data
 
 class HeadType(graphene.ObjectType):
     vars = graphene.List(graphene.String)
@@ -25,13 +25,16 @@ class ResultsType(graphene.ObjectType):
     bindings = graphene.List(BindingType)
     def resolve_bindings(self, info):
         if hasattr(self, "bindings"):
+            print("bindings")
+            print(self.bindings.all())
             return self.bindings.all()
         return []
 
-class JsonDataType(graphene.ObjectType):
+class DataType(graphene.ObjectType):
     head = graphene.Field(HeadType)
     results = graphene.Field(ResultsType)
-
+    print(head)
+    print(results)
     def resolve_head(self, info):
         return self.head
 
@@ -39,10 +42,19 @@ class JsonDataType(graphene.ObjectType):
         return self.results
 
 class Query(graphene.ObjectType):
-    json_data = graphene.Field(JsonDataType)
+    head = graphene.Field(HeadType)  
+    results = graphene.Field(ResultsType) 
 
-    def resolve_json_data(self, info):
-        json_data_instance = JsonData.objects.first()
-        return json_data_instance
+    def resolve_head(self, info):
+        data_instance = Data.objects.first()
+        if data_instance:
+            return data_instance.head  
+        return None
+
+    def resolve_results(self, info):
+        data_instance = Data.objects.first()
+        if data_instance:
+            return data_instance.results  
+        return None
 
 schema = graphene.Schema(query=Query)
