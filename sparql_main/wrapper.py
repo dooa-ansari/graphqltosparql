@@ -3,7 +3,7 @@ import ssl
 import json
 
 from .date_parser import parse_date
-from .models import Binding, Data, Head, Results
+from .models import Binding, Data, Head, Results, PropertyType
 
 def sparqlWrapperTest(dataset_name):
     try:
@@ -61,7 +61,7 @@ WHERE {
     ?maintainer foaf:mbox ?maintainerEmail .
   }
 }
-LIMIT 2
+LIMIT 100
     """)
     sparql.setReturnFormat(JSON)
     results = sparql.query().convert()
@@ -76,17 +76,70 @@ LIMIT 2
     
     for binding in results_data.get('bindings', []):
         binding_obj = Binding.objects.create(
-            distribution=binding.get('distribution', {}).get('value'),
-            title=binding.get('title', {}).get('value'),
-            mediaType=binding.get('mediaType', {}).get('value'),
-            modified=parse_date(binding.get('modified', {}).get('value')),
-            identifier=binding.get('identifier', {}).get('value'),
-            accessURL=binding.get('accessURL', {}).get('value'),
-            description=binding.get('description', {}).get('value'),
-            geometry=json.loads(binding.get('geometry', {}).get('value', "{}")), 
-            license=binding.get('license', {}).get('value'),
-            publisherName=binding.get('publisherName', {}).get('value'),
-            maintainerEmail=binding.get('maintainerEmail', {}).get('value'),
+            distribution=PropertyType.objects.create(
+              type = binding.get('distribution', {}).get('type'),
+              value = binding.get('distribution', {}).get('value'),
+              datatype = binding.get('distribution', {}).get('datatype'),
+              xmlLang = binding.get('distribution', {}).get('xml:lang'),
+            ),
+            title=PropertyType.objects.create(
+              type = binding.get('title', {}).get('type'),
+              value = binding.get('title', {}).get('value'),
+              xmlLang = binding.get('title', {}).get('xml:lang'),
+            ),
+            mediaType=PropertyType.objects.create(
+              type = binding.get('mediaType', {}).get('type'),
+              value = binding.get('mediaType', {}).get('value'),
+              xmlLang = binding.get('mediaType', {}).get('xml:lang'),
+            ),
+            modified=PropertyType.objects.create(
+              type = binding.get('modified', {}).get('type'),
+              value = binding.get('modified', {}).get('value'),
+              datatype = binding.get('modified', {}).get('datatype'),
+              xmlLang = binding.get('modified', {}).get('xml:lang'),
+            ),
+            identifier=PropertyType.objects.create(
+              type = binding.get('identifier', {}).get('type'),
+              value = binding.get('identifier', {}).get('value'),
+              datatype = binding.get('identifier', {}).get('datatype'),
+              xmlLang = binding.get('identifier', {}).get('xml:lang'),
+            ),
+            accessURL=PropertyType.objects.create(
+              type = binding.get('accessUrl', {}).get('type'),
+              value = binding.get('accessUrl', {}).get('value'),
+              datatype = binding.get('accessUrl', {}).get('datatype'),
+              xmlLang = binding.get('accessUrl', {}).get('xml:lang'),
+            ),
+            description=PropertyType.objects.create(
+              type = binding.get('description', {}).get('type'),
+              value = binding.get('description', {}).get('value'),
+              datatype = binding.get('description', {}).get('datatype'),
+              xmlLang = binding.get('description', {}).get('xml:lang'),
+            ),
+            geometry= PropertyType.objects.create(
+              type = binding.get('geometry', {}).get('type'),
+              value = json.loads(binding.get('geometry', {}).get('value', "{}")), 
+              datatype = binding.get('geometry', {}).get('datatype'),
+              xmlLang = binding.get('geometry', {}).get('xml:lang'),
+            ),
+            license=PropertyType.objects.create(
+              type = binding.get('license', {}).get('type'),
+              value = binding.get('license', {}).get('value'),
+              datatype = binding.get('license', {}).get('datatype'),
+              xmlLang = binding.get('license', {}).get('xml:lang'),
+            ),
+            publisherName=PropertyType.objects.create(
+              type = binding.get('publisherName', {}).get('type'),
+              value = binding.get('publisherName', {}).get('value'),
+              datatype = binding.get('publisherName', {}).get('datatype'),
+              xmlLang = binding.get('publisherName', {}).get('xml:lang'),
+            ),
+            maintainerEmail=PropertyType.objects.create(
+              type = binding.get('maintainerEmail', {}).get('type'),
+              value = binding.get('maintainerEmail', {}).get('value'),
+              datatype = binding.get('maintainerEmail', {}).get('datatype'),
+              xmlLang = binding.get('maintainerEmail', {}).get('xml:lang'),
+            )
         )
         bindings.append(binding_obj)
         
