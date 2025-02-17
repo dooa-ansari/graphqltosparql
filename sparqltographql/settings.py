@@ -139,5 +139,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 GRAPHENE = {
-    'SCHEMA': 'graphql_main.schema.schema' 
+    'SCHEMA': 'graphql_main.schema.schema' ,
+    "MIDDLEWARE": []
 }

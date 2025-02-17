@@ -55,20 +55,14 @@ class ReplaceXmlLangMiddleware:
         self.get_response = get_response
 
     def __call__(self, request):
-        # Get the response from the view
         response = self.get_response(request)
-
-        # Check if the request is for GraphQL and content type is JSON
         if request.path == "/graphql/" and response.get("Content-Type") == "application/json":
             try:
-                # Parse the response body to manipulate the data
                 data = json.loads(response.content)
 
-                # Apply the function to replace 'xmlLang' with 'xml:lang'
                 if 'data' in data:
                     data['data'] = self.replace_xml_lang(data['data'])
 
-                # Convert the manipulated data back to JSON
                 response.content = json.dumps(data)
                 
             except Exception as e:
@@ -77,18 +71,12 @@ class ReplaceXmlLangMiddleware:
         return response
 
     def replace_xml_lang(self, data):
-        """
-        Recursively replace 'xmlLang' with 'xml:lang' in the data.
-        """
         if isinstance(data, dict):
-            # If the data is a dictionary, recursively check each key
             return {
                 (k.replace("xmlLang", "xml:lang") if "xmlLang" in k else k): self.replace_xml_lang(v)
                 for k, v in data.items()
             }
         elif isinstance(data, list):
-            # If the data is a list, recursively process each item
             return [self.replace_xml_lang(item) for item in data]
         else:
-            # Return the value as is for other types
             return data

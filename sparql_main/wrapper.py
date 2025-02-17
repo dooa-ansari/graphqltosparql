@@ -2,8 +2,25 @@ from SPARQLWrapper import SPARQLWrapper, JSON
 import ssl
 import json
 
+# introduce filters and dropdowns for different types of queries like filter etc
+
 from .date_parser import parse_date
 from .models import Binding, Data, Head, Results, PropertyType
+
+
+
+def parse_geometry(value):
+    if not value:
+        return None
+
+    try:
+        parsed_value = json.loads(value) 
+        if isinstance(parsed_value, dict) and "type" in parsed_value and "coordinates" in parsed_value:
+            return parsed_value 
+    except json.JSONDecodeError:
+        pass 
+
+    return value
 
 def sparqlWrapperTest(dataset_name):
     try:
@@ -61,7 +78,7 @@ WHERE {
     ?maintainer foaf:mbox ?maintainerEmail .
   }
 }
-LIMIT 100
+LIMIT 200
     """)
     sparql.setReturnFormat(JSON)
     results = sparql.query().convert()
@@ -74,7 +91,13 @@ LIMIT 100
     results_data = results.get('results', {})
     bindings = []
     
+    Data.objects.all().delete()      
+    Results.objects.all().delete()  
+    Binding.objects.all().delete()   
+    PropertyType.objects.all().delete() 
+    
     for binding in results_data.get('bindings', []):
+        print(binding)
         binding_obj = Binding.objects.create(
             distribution=PropertyType.objects.create(
               type = binding.get('distribution', {}).get('type'),
@@ -118,7 +141,7 @@ LIMIT 100
             ),
             geometry= PropertyType.objects.create(
               type = binding.get('geometry', {}).get('type'),
-              value = json.loads(binding.get('geometry', {}).get('value', "{}")), 
+              value = parse_geometry(binding.get('geometry', {}).get('value', "{}")), 
               datatype = binding.get('geometry', {}).get('datatype'),
               xmlLang = binding.get('geometry', {}).get('xml:lang'),
             ),
