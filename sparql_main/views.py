@@ -1,4 +1,5 @@
 from pymantic import sparql
+from .get_graph_iris import graphIRIs
 from .wrapper import *
 from .euro_data_fetcher import open_sparql_url
 from .sparql_query import *
@@ -31,6 +32,17 @@ def get_search_chemnitz_list(data):
         only_list = data.get("result", {}).get("results", [])
         
         return JsonResponse(only_list, safe=False)
+    
+    except requests.exceptions.RequestException as e:
+        return JsonResponse({"error": str(e)}, status=500)
+    
+    
+def get_available_graph_iris(request):
+    try:
+        limit = request.GET.get("limit", "") 
+        response = graphIRIs(limit)
+        
+        return JsonResponse(response, safe=False)
     
     except requests.exceptions.RequestException as e:
         return JsonResponse({"error": str(e)}, status=500)
