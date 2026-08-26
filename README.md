@@ -1,6 +1,18 @@
 # GraphQL-to-SPARQL (Master's Thesis)
 
-A Django project that maps an existing SPARQL/Open Data endpoint to a GraphQL schema while preserving data structure and integrity. The project fetches SPARQL query results, saves them into Django models, and exposes a GraphQL schema (via Graphene) so frontends or applications can query the data without writing SPARQL.
+Thema : "Processing of mapping an existing SparQL Open Data endpoint to GraphQL endpoint without losing data integrity"
+
+A Django project that maps an existing SPARQL/Open Data endpoint to a GraphQL schema while preserving data structure and integrity. The project fetches SPARQL query results, saves them into Django models and exposes a GraphQL API for easier consumption by frontends and applications.
+
+**Motivation**
+The rigid structure of SPARQL queries and the need to comprehend data schemas make it difficult for frontend or application end users to utilise open data effectively. Moreover, small-level organizations and projects may lack tools or expertise to craft SPARQL queries; exposing the same data through a GraphQL layer makes discovery and consumption easier while preserving the original data integrity.
+
+
+<img width="661" alt="Screenshot 2025-07-07 at 7 42 36 PM" src="https://github.com/user-attachments/assets/8e768668-82d6-4ce1-97ee-75b1b8b93738" />
+
+Frontend Design
+<img width="1370" alt="Screenshot 2025-06-27 at 3 56 20 PM" src="https://github.com/user-attachments/assets/e6585099-4ad6-4eb0-b6df-cdb49f2830db" />
+
 
 ## Features
 - Fetches dataset entries from a SPARQL endpoint (example uses data.europa.eu)
@@ -113,5 +125,3 @@ query {
 No license file detected in the repository. Add a LICENSE file if you intend to publish or permit reuse.
 
 ---
-
-If you want, I can also create a pull request from the `improve-readme` branch once this README is committed — I will need your confirmation to open the PR since I do not have a GitHub API method for creating pull requests in this environment. Alternatively, you can open the PR in the repo UI and merge it when ready.
